@@ -4,28 +4,21 @@
 <!-- IE8+に対して「IE=edge」と指定することで、利用できる最も互換性の高い最新のエンジンを使用するよう指示できます
      参考: https://www.modern.ie/en-us/performance/how-to-use-x-ua-compatible -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
 <!-- ページのタイトルを記述 -->
-<title></title>
-
+<title>ファイルアップロード</title>
 <!-- パフォーマンスのために使用する文字のエンコーディングを記述
      参考: https://developers.google.com/speed/docs/best-practices/rendering#SpecifyCharsetEarly -->
 <meta charset="utf-8">
-
 <!-- content属性にページの紹介文を記述 -->
 <meta name="description" content="">
-
 <!-- content属性にページの著者情報を記述 -->
 <meta name="author" content="">
-
 <!-- モバイル端末への対応、ページをビューポートの幅に合わせてレンダリング（Android, iOS6以降）
      ズームを許可しない設定「user-scalable=no」は加えない -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <!-- スタイルシートはできるだけ早くレンダリングされるため、HTMLドキュメントの上の方に記述
      href属性にスタイルシートファイルのURIを記述 -->
 <link rel="stylesheet" href="">
-
 <!-- IE8以下用に2つのスクリプトを記述
      html5shiv.js: IE8以下にHTML5の要素を認識するようにさせる
      respond.js: IE8以下にMedia Queriesの代替え機能を提供 -->
@@ -33,24 +26,93 @@
 <script src="//cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 <!&#91;endif&#93;-->
-
 <!-- href属性にファビコンファイルのURIを記述 -->
 <link rel="shortcut icon" href="">
-
 <!-- コメントアウトしてあるコードは、iOS/Android用のアイコン指定 -->
 <!--
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="icon" sizes="196x196" href="">
 <link rel="apple-touch-icon" sizes="152x152" href="">
 -->
-
 <!-- スクリプトでブロッキングを起こさないものはここに記述
      可能であれば「async（文書の読み込みが完了した時点でスクリプトを実行）」を使用
      Example: <script src="" async></script> -->
 </head>
 <body>
+<style>
+html, body { width:100%; height:100%; margin:0; padding:0; }
+#transparentView {
+	position:fixed;
+	width:100%; height:100%;
+	top:0; left:0;
+	z-index:100;
+	background-color:rgba(235, 54, 231, 0.3);
+	border:5px solid rgb(235, 54, 231);
+	box-sizing: border-box;
+}
+</style>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+$(function(){
+	var dnd = new DndAction();
+});
 
-<!-- コンテンツを記述 -->
+function DndAction() {
+	var self = this;
+	self.isDragIn = false;
+	self.initialize = function() {
+		this.setEventListener();
+	}
+	self.showIsDragIn = function() {
+		alert( self.isDragIn );
+	}
+	$(document).on("click", "#showIsDragIn", function(e) {
+		console.log( $(e.target).attr("id") );
+		console.log( e.type );
+		self.showIsDragIn()
+	});
+	self.setEventListener = function () {
+
+		$("body").on("dragenter", function(e){
+			console.log( e.type );
+			if ( self.isDragIn ) {
+				return false;
+			}
+			dragIn();
+		});
+
+		$(document).on("drop dragleave", "#transparentView", function(e){
+			console.log( e.type );
+			dragOut();
+			e.preventDefault();
+
+		}).on("drop dragover", function(e) {
+			console.log( e.type );
+			e.preventDefault();
+
+		}).on("drop", function(e) {
+			console.log( e.type );
+
+			var files = e.originalEvent.dataTransfer.files;
+			console.log( files );
+		});
+
+		function dragIn() {
+			$("body").append( $("<div id=transparentView></div>") );
+			self.isDragIn = true;
+		}
+		function dragOut() {
+			$("#transparentView").remove();
+			self.isDragIn = false;
+		}
+	}
+	this.initialize();
+}
+</script>
+
+<h1>DnD Demo</h1>
+<p>ドラッグアンドドロップの検証です。</p>
+<p><input type="button" id="showIsDragIn" value="showIsDragIn"></p>
 
 <!-- スクリプトでブロッキングを起こすものはここに記述
 ブロッキングを起こす原因としては、CSSのセレクタ操作（IE）、負荷の高いDOM操作、多数のスクリプトなど -->
