@@ -67,7 +67,10 @@ function DndAction() {
 		}
 		function upload(file) {
 			var ajax = JqueryAjax();
-			ajax.get({file: file});
+			ajax.get({
+				url : Settings.webPath + "/ajax_test.php",
+				file: file
+			});
 		}
 		function uploadFileCheck(file) {
 			if ( file.size > 100 ) {

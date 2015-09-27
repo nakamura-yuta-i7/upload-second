@@ -59,6 +59,11 @@ html, body { width:100%; height:100%; margin:0; padding:0; }
 <!-- スクリプトでブロッキングを起こすものはここに記述
 ブロッキングを起こす原因としては、CSSのセレクタ操作（IE）、負荷の高いDOM操作、多数のスクリプトなど -->
 <script src="<?php echo WEB_PATH; ?>/javascripts/jquery-1.11.3.min.js"></script>
+<script>
+var Settings = {
+	webPath: "<?php echo WEB_PATH; ?>"
+}
+</script>
 <script src="<?php echo WEB_PATH; ?>/javascripts/errors.js"></script>
 <script src="<?php echo WEB_PATH; ?>/javascripts/requests.js"></script>
 <script src="<?php echo WEB_PATH; ?>/javascripts/dnd_action.js"></script>
