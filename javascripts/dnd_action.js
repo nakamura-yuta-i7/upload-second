@@ -4,6 +4,7 @@ $(function(){
 
 function DndAction() {
 	var self = this;
+
 	self.isDragIn = false;
 
 	self.initialize = function() {
@@ -13,36 +14,45 @@ function DndAction() {
 	self.setDndEvent = function () {
 
 		$("body").on("dragenter", function(e){
-			console.log( e.type );
-			if ( self.isDragIn ) {
-				return false;
-			}
+			console.debug( e.type );
 			dragIn();
 		});
 
 		$(document).on("drop dragleave", "#transparentView", function(e){
-			console.log( e.type );
+			console.debug( e.type );
 			dragOut();
 			e.preventDefault();
 
 		}).on("drop dragover", function(e) {
-			console.log( e.type );
+			console.debug( e.type );
 			e.preventDefault();
 
 		}).on("drop", function(e) {
-			console.log( e );
+			console.debug( e.type );
+			console.debug( e );
 
 			var files = e.originalEvent.dataTransfer.files;
-			console.log( files );
 			uploadFiles( files );
 		});
 
 		function uploadFiles(files) {
+
+			// １リクエスト複数ファイルアップロードサンプル:
+			// var ajax = JqueryAjax();
+			// ajax.uploadMulti( files, {
+			// 	url : Settings.webPath + "/ajax_test.php",
+			// 	data: {title:"nakamura",name:"yuta"},
+			// 	success: function(data) {
+			// 		console.debug( "#####" );
+			// 		console.debug( data );
+			// 		console.debug( "#####" );
+			// 	}
+			// });
+
 			var validFiles = [];
 			Object.keys(files).forEach(function(key){
 				var file = files[key];
-
-				console.log( file );
+				// console.debug( file );
 				// file sample object:
 				// lastModified: 1442898478000
 				// lastModifiedDate: Tue Sep 22 2015 14:07:58 GMT+0900 (JST)
@@ -53,23 +63,30 @@ function DndAction() {
 
 				try {
 					uploadFileCheck(file);
-					console.log( "success file: " + file.name );
+					console.debug( "success file: " + file.name );
 					validFiles.push( file );
+
 				} catch (err) {
-					console.log( err.message );
+					console.debug( err.message );
 				}
 			});
 
-			console.log( "validFiles" );
+			console.debug( "validFiles" );
 			validFiles.forEach(function(file){
 				upload(file);
 			});
 		}
 		function upload(file) {
+			
+			var Settings = requirejs.config.settings;
 			var ajax = JqueryAjax();
-			ajax.get({
+			ajax.uploadSingle( file, {
 				url : Settings.webPath + "/ajax_test.php",
-				file: file
+				data: {title:"nakamura",name:"yuta"},
+				success: function(data) {
+					console.debug( "!!!!!" );
+					console.debug( data );
+				}
 			});
 		}
 		function uploadFileCheck(file) {
@@ -79,6 +96,9 @@ function DndAction() {
 		}
 
 		function dragIn() {
+			if ( self.isDragIn ) {
+				return false;
+			}
 			$("body").append( $("<div id=transparentView></div>") );
 			self.isDragIn = true;
 		}
@@ -89,8 +109,8 @@ function DndAction() {
 	}
 	self.setButtonEvent = function() {
 		$(document).on("click", "#showIsDragIn", function(e) {
-			console.log( $(e.target).attr("id") );
-			console.log( e.type );
+			console.debug( $(e.target).attr("id") );
+			console.debug( e.type );
 			showIsDragIn()
 		});
 		function showIsDragIn() {

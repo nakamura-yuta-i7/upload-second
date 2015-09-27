@@ -16,9 +16,6 @@
 <!-- モバイル端末への対応、ページをビューポートの幅に合わせてレンダリング（Android, iOS6以降）
      ズームを許可しない設定「user-scalable=no」は加えない -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- スタイルシートはできるだけ早くレンダリングされるため、HTMLドキュメントの上の方に記述
-     href属性にスタイルシートファイルのURIを記述 -->
-<link rel="stylesheet" href="">
 <!-- IE8以下用に2つのスクリプトを記述
      html5shiv.js: IE8以下にHTML5の要素を認識するようにさせる
      respond.js: IE8以下にMedia Queriesの代替え機能を提供 -->
@@ -27,7 +24,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 <!&#91;endif&#93;-->
 <!-- href属性にファビコンファイルのURIを記述 -->
-<link rel="shortcut icon" href="">
+<!-- <link rel="shortcut icon" href=""> -->
 <!-- コメントアウトしてあるコードは、iOS/Android用のアイコン指定 -->
 <!--
 <meta name="mobile-web-app-capable" content="yes">
@@ -39,18 +36,9 @@
      Example: <script src="" async></script> -->
 </head>
 <body>
-<style>
-html, body { width:100%; height:100%; margin:0; padding:0; }
-#transparentView {
-	position:fixed;
-	width:100%; height:100%;
-	top:0; left:0;
-	z-index:100;
-	background-color:rgba(235, 54, 231, 0.3);
-	border:5px solid rgb(235, 54, 231);
-	box-sizing: border-box;
-}
-</style>
+<!-- スタイルシートはできるだけ早くレンダリングされるため、HTMLドキュメントの上の方に記述
+     href属性にスタイルシートファイルのURIを記述 -->
+<link rel="stylesheet" href="<?php echo WEB_PATH; ?>/styles/basic.css">
 
 <h1>DnD Demo</h1>
 <p>ドラッグアンドドロップの検証です。</p>
@@ -58,23 +46,14 @@ html, body { width:100%; height:100%; margin:0; padding:0; }
 
 <!-- スクリプトでブロッキングを起こすものはここに記述
 ブロッキングを起こす原因としては、CSSのセレクタ操作（IE）、負荷の高いDOM操作、多数のスクリプトなど -->
-<script src="<?php echo WEB_PATH; ?>/javascripts/jquery-1.11.3.min.js"></script>
-<script>
-var Settings = {
-	webPath: "<?php echo WEB_PATH; ?>"
-}
-</script>
+<script src="<?php echo WEB_PATH; ?>/libs/jquery/jquery-1.11.3.min.js"></script>
+<script
+	src="<?php echo WEB_PATH; ?>/libs/require/require-2.1.20.js"
+	data-main="<?php echo WEB_PATH; ?>/javascripts/main.js"></script>
+<!-- <script src="<?php echo WEB_PATH; ?>/javascripts/extension.js"></script>
 <script src="<?php echo WEB_PATH; ?>/javascripts/errors.js"></script>
-<script src="<?php echo WEB_PATH; ?>/javascripts/requests.js"></script>
-<script src="<?php echo WEB_PATH; ?>/javascripts/dnd_action.js"></script>
-<script>
-try {
-	throw new InputStringParserError("yuta");
-} catch (e) {
-	if ( e instanceof InputStringParserError ) {
-		console.log( e.message );
-	}
-}
-</script>
+<script src="<?php echo WEB_PATH; ?>/javascripts/jquery_ajax.js"></script>
+<script src="<?php echo WEB_PATH; ?>/javascripts/dnd_action.js"></script> -->
+
 </body>
 </html>
