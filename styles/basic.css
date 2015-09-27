@@ -1,11 +1,12 @@
 html, body { width:100%; height:100%; margin:0; padding:0; }
-body { padding:10px; }
+body { padding:10px; background:#c10096; color:#fff; }
 #transparentView {
 	position:fixed;
 	width:100%; height:100%;
 	top:0; left:0;
 	z-index:100;
-	background-color:rgba(235, 54, 231, 0.3);
-	border:5px solid rgb(235, 54, 231);
+	background-color:rgba(255, 255, 255, 0.3);
+	border:5px solid rgb(255, 255, 255);
 	box-sizing: border-box;
 }
+input { color:#333; }
