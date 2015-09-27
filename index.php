@@ -34,19 +34,45 @@
 <!-- スクリプトでブロッキングを起こさないものはここに記述
      可能であれば「async（文書の読み込みが完了した時点でスクリプトを実行）」を使用
      Example: <script src="" async></script> -->
+
+<script src="<?php echo WEB_PATH; ?>/libs/jquery/jquery-1.11.3.min.js" async></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" async></script>
 </head>
 <body>
 <!-- スタイルシートはできるだけ早くレンダリングされるため、HTMLドキュメントの上の方に記述
      href属性にスタイルシートファイルのURIを記述 -->
 <link rel="stylesheet" href="<?php echo WEB_PATH; ?>/styles/basic.css">
 
-<h1>DnD Demo</h1>
+<h1>
+	<span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
+	DnD Demo
+</h1>
 <p>ドラッグアンドドロップの検証です。</p>
-<p><input type="button" id="showIsDragIn" value="showIsDragIn"></p>
+
+<div class="container-fluid">
+	<div class="row">
+	  <div class="col-xs-1">.col-xs-1</div>
+	  <div class="col-xs-1">.col-xs-1</div>
+	  <div class="col-xs-1">.col-xs-1</div>
+	  <div class="col-xs-1">.col-xs-1</div>
+	  <div class="col-xs-1">.col-xs-1</div>
+	  <div class="col-xs-1">.col-xs-1</div>
+	  <div class="col-xs-1">.col-xs-1</div>
+	  <div class="col-xs-1">.col-xs-1</div>
+	  <div class="col-xs-1">.col-xs-1</div>
+	  <div class="col-xs-1">.col-xs-1</div>
+	  <div class="col-xs-1">.col-xs-1</div>
+	  <div class="col-xs-1">.col-xs-1</div>
+	</div>
+</div>
 
 <!-- スクリプトでブロッキングを起こすものはここに記述
 ブロッキングを起こす原因としては、CSSのセレクタ操作（IE）、負荷の高いDOM操作、多数のスクリプトなど -->
-<script src="<?php echo WEB_PATH; ?>/libs/jquery/jquery-1.11.3.min.js"></script>
 <script
 	src="<?php echo WEB_PATH; ?>/libs/require/require-2.1.20.js"
 	data-main="<?php echo WEB_PATH; ?>/javascripts/main.js"></script>

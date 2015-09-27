@@ -9,7 +9,6 @@ function DndAction() {
 
 	self.initialize = function() {
 		self.setDndEvent();
-		self.setButtonEvent();
 	}
 	self.setDndEvent = function () {
 
@@ -77,7 +76,7 @@ function DndAction() {
 			});
 		}
 		function upload(file) {
-			
+
 			var Settings = requirejs.config.settings;
 			var ajax = JqueryAjax();
 			ajax.uploadSingle( file, {
@@ -105,16 +104,6 @@ function DndAction() {
 		function dragOut() {
 			$("#transparentView").remove();
 			self.isDragIn = false;
-		}
-	}
-	self.setButtonEvent = function() {
-		$(document).on("click", "#showIsDragIn", function(e) {
-			console.debug( $(e.target).attr("id") );
-			console.debug( e.type );
-			showIsDragIn()
-		});
-		function showIsDragIn() {
-			alert( self.isDragIn );
 		}
 	}
 	this.initialize();
