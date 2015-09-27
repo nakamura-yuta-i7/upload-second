@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once './config.php'; ?><!DOCTYPE html>
 <html>
 <head>
 <!-- IE8+に対して「IE=edge」と指定することで、利用できる最も互換性の高い最新のエンジンを使用するよう指示できます
@@ -51,64 +51,6 @@ html, body { width:100%; height:100%; margin:0; padding:0; }
 	box-sizing: border-box;
 }
 </style>
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script>
-$(function(){
-	var dnd = new DndAction();
-});
-
-function DndAction() {
-	var self = this;
-	self.isDragIn = false;
-	self.initialize = function() {
-		this.setEventListener();
-	}
-	self.showIsDragIn = function() {
-		alert( self.isDragIn );
-	}
-	$(document).on("click", "#showIsDragIn", function(e) {
-		console.log( $(e.target).attr("id") );
-		console.log( e.type );
-		self.showIsDragIn()
-	});
-	self.setEventListener = function () {
-
-		$("body").on("dragenter", function(e){
-			console.log( e.type );
-			if ( self.isDragIn ) {
-				return false;
-			}
-			dragIn();
-		});
-
-		$(document).on("drop dragleave", "#transparentView", function(e){
-			console.log( e.type );
-			dragOut();
-			e.preventDefault();
-
-		}).on("drop dragover", function(e) {
-			console.log( e.type );
-			e.preventDefault();
-
-		}).on("drop", function(e) {
-			console.log( e.type );
-
-			var files = e.originalEvent.dataTransfer.files;
-			console.log( files );
-		});
-
-		function dragIn() {
-			$("body").append( $("<div id=transparentView></div>") );
-			self.isDragIn = true;
-		}
-		function dragOut() {
-			$("#transparentView").remove();
-			self.isDragIn = false;
-		}
-	}
-	this.initialize();
-}
-</script>
 
 <h1>DnD Demo</h1>
 <p>ドラッグアンドドロップの検証です。</p>
@@ -116,7 +58,18 @@ function DndAction() {
 
 <!-- スクリプトでブロッキングを起こすものはここに記述
 ブロッキングを起こす原因としては、CSSのセレクタ操作（IE）、負荷の高いDOM操作、多数のスクリプトなど -->
-<!-- SCRIPTS -->
-<!-- 例: <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+<script src="<?php echo WEB_PATH; ?>/javascripts/jquery-1.11.3.min.js"></script>
+<script src="<?php echo WEB_PATH; ?>/javascripts/errors.js"></script>
+<script src="<?php echo WEB_PATH; ?>/javascripts/requests.js"></script>
+<script src="<?php echo WEB_PATH; ?>/javascripts/dnd_action.js"></script>
+<script>
+try {
+	throw new InputStringParserError("yuta");
+} catch (e) {
+	if ( e instanceof InputStringParserError ) {
+		console.log( e.message );
+	}
+}
+</script>
 </body>
 </html>
