@@ -10,3 +10,14 @@ body { padding:10px; background:#c10096; color:#fff; }
 	box-sizing: border-box;
 }
 input { color:#333; }
+
+#progress-area {
+	background:#ffffff;
+	position:fixed;
+	bottom:0;
+	right:0;
+	color:#333;
+}
+#progress-area ul { margin:0; padding:0; }
+#progress-area li { margin:0; padding:0; list-style: none;}
+#progress-area .progre { margin-left:1em; }

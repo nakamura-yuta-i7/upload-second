@@ -10,7 +10,7 @@ requirejs.config = {
 
 var scripts = [
 	// "libs/jquery/jquery-1.11.3.min.js",
-	//"extension",
+	"extension",
 	"errors",
 	"jquery_ajax",
 	"dnd_action",
@@ -24,4 +24,8 @@ requirejs(scripts, function(){
 			console.debug( e.message );
 		}
 	}
+
+	$(function(){
+		new DndAction();
+	});
 });

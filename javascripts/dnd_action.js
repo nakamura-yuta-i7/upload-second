@@ -1,7 +1,3 @@
-$(function(){
-	new DndAction();
-});
-
 function DndAction() {
 	var self = this;
 
@@ -61,36 +57,66 @@ function DndAction() {
 				// webkitRelativePath: ""
 
 				try {
-					uploadFileCheck(file);
-					console.debug( "success file: " + file.name );
+					uploadFileCheck( file );
 					validFiles.push( file );
-
 				} catch (err) {
 					console.debug( err.message );
 				}
 			});
-
-			console.debug( "validFiles" );
-			validFiles.forEach(function(file){
-				upload(file);
+			console.log( "async" );
+			async.forEachSeries(validFiles, function(file, next){
+				console.log( "!!!!!!!!!!!" + file );
+				upload(file, function(){
+					console.log( "#########" );
+					next();
+				});
+			}, function(err) {
+				console.log( "$$$$$$$$$$" );
 			});
 		}
-		function upload(file) {
-
+		function upload(file, callback) {
+			
+			var uid = uid();
+			appendProgreItem();
+			
 			var Settings = requirejs.config.settings;
 			var ajax = JqueryAjax();
 			ajax.uploadSingle( file, {
-				url : Settings.webPath + "/ajax_test.php",
+				url : Settings.webPath + "/ajax_upload.php",
 				data: {title:"nakamura",name:"yuta"},
 				success: function(data) {
-					console.debug( "!!!!!" );
 					console.debug( data );
+					callback();
+				},
+				xhr : function(){
+					XHR = $.ajaxSettings.xhr();
+					if( XHR.upload ){
+						XHR.upload.addEventListener('progress',function(e){
+							progre = parseInt( e.loaded / e.total * 10000 ) / 100;
+							console.debug(progre+"% !!!!!!");
+							$("#"+ uid ).find(".progre").html(progre + "%");
+						}, false);
+					}
+					return XHR;
 				}
 			});
+			
+			function uid() {
+				return Math.random().toString(36).substr(2, 9);
+			}
+			function appendProgreItem() {
+				var ul = $("<ul>");
+				var li = $("<li>");
+				ul.append( li );
+				li.append( file.name ).attr("id",uid);
+				li.append( $("<span class=progre></span>") );
+				$("#progress-area").append( ul );
+			}
 		}
 		function uploadFileCheck(file) {
-			if ( file.size > 100 ) {
-				throw Error("ファイルサイズ上限は100byteです。");
+			var mb = 100;
+			if ( file.size > 1000 * 1000 * mb ) {
+				throw Error("ファイルサイズ上限は"+ mb +"mbです。");
 			}
 		}
 

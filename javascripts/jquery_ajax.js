@@ -58,12 +58,10 @@ function JqueryAjax() {
 		});
 	}
 	self.uploadSingle = function(file, params) {
-		console.debug( params );
 		params.file = file;
 		return self.post(params);
 	}
 	self.uploadMulti = function(files, params) {
-		console.debug( params );
 		params.files = files;
 		return self.post(params);
 	}

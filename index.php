@@ -36,39 +36,38 @@
      Example: <script src="" async></script> -->
 
 <script src="<?php echo WEB_PATH; ?>/libs/jquery/jquery-1.11.3.min.js" async></script>
+<script src="<?php echo WEB_PATH; ?>/libs/async.js" async></script>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" async></script>
-</head>
-<body>
 <!-- スタイルシートはできるだけ早くレンダリングされるため、HTMLドキュメントの上の方に記述
      href属性にスタイルシートファイルのURIを記述 -->
 <link rel="stylesheet" href="<?php echo WEB_PATH; ?>/styles/basic.css">
+</head>
+<body>
 
-<h1>
-	<span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
-	DnD Demo
-</h1>
-<p>ドラッグアンドドロップの検証です。</p>
 
-<div class="container-fluid">
-	<div class="row">
-	  <div class="col-xs-1">.col-xs-1</div>
-	  <div class="col-xs-1">.col-xs-1</div>
-	  <div class="col-xs-1">.col-xs-1</div>
-	  <div class="col-xs-1">.col-xs-1</div>
-	  <div class="col-xs-1">.col-xs-1</div>
-	  <div class="col-xs-1">.col-xs-1</div>
-	  <div class="col-xs-1">.col-xs-1</div>
-	  <div class="col-xs-1">.col-xs-1</div>
-	  <div class="col-xs-1">.col-xs-1</div>
-	  <div class="col-xs-1">.col-xs-1</div>
-	  <div class="col-xs-1">.col-xs-1</div>
-	  <div class="col-xs-1">.col-xs-1</div>
+<div class="container text-center">
+
+	<h1 style="margin:2em;">
+		<span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
+		DnD Demo
+	</h1>
+	<p style="margin-bottom:2em;">ドラッグアンドドロップの検証です。</p>
+
+	<div class="row clearfix">
+		<div class="col-xs-2">.col-xs-2</div>
+		<div class="col-xs-2">.col-xs-2</div>
+		<div class="col-xs-2">.col-xs-2</div>
+		<div class="col-xs-2">.col-xs-2</div>
+		<div class="col-xs-2">.col-xs-2</div>
+		<div class="col-xs-2">.col-xs-2</div>
 	</div>
+	
+	<div id="progress-area"></div>
 </div>
 
 <!-- スクリプトでブロッキングを起こすものはここに記述
@@ -80,6 +79,5 @@
 <script src="<?php echo WEB_PATH; ?>/javascripts/errors.js"></script>
 <script src="<?php echo WEB_PATH; ?>/javascripts/jquery_ajax.js"></script>
 <script src="<?php echo WEB_PATH; ?>/javascripts/dnd_action.js"></script> -->
-
 </body>
 </html>
