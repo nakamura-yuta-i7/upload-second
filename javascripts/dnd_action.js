@@ -124,11 +124,14 @@ function DndAction() {
 			if ( self.isDragIn ) {
 				return false;
 			}
-			$("body").append( $("<div id=transparentView></div>") );
+			var centerMessageArea = $('<div id=centerMessageArea><span class="glyphicon glyphicon-level-up" aria-hidden="true"></span></div>');
+			$("body").append( $("<div id=transparentView></div>") ).append(centerMessageArea);
+			$("#centerMessageArea").animate({top:"50%",opacity:1}, 800, "easeOutCubic");
 			self.isDragIn = true;
 		}
 		function dragOut() {
 			$("#transparentView").remove();
+			$("#centerMessageArea").remove();
 			self.isDragIn = false;
 		}
 	}

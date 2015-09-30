@@ -34,8 +34,9 @@
 <!-- スクリプトでブロッキングを起こさないものはここに記述
      可能であれば「async（文書の読み込みが完了した時点でスクリプトを実行）」を使用
      Example: <script src="" async></script> -->
-
-<script src="<?php echo WEB_PATH; ?>/libs/jquery/jquery-1.11.3.min.js" async></script>
+	 
+ <script src="<?php echo WEB_PATH; ?>/libs/jquery/jquery-1.11.3.min.js"></script>
+ <script src="<?php echo WEB_PATH; ?>/libs/jquery/jquery.easing.1.3.js"></script>
 <script src="<?php echo WEB_PATH; ?>/libs/async.js" async></script>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">

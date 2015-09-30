@@ -21,3 +21,17 @@ input { color:#333; }
 #progress-area ul { margin:0; padding:0; }
 #progress-area li { margin:0; padding:0; list-style: none;}
 #progress-area .progre { margin-left:1em; }
+#centerMessageArea { width:200px;height:200px;background: #fff;color:#c10096;font-weight: 900;
+	z-index:99;
+	font-size: 60px;
+	position: fixed;
+	opacity: 0;
+	top:45%;
+	left: 50%;
+	margin: -100px 0 0 -100px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 200px;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+}
