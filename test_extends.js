@@ -19,8 +19,6 @@ var Singleton = (function() {
 		return _instance = new this();
 	}
 	return _construct;
-	
-	this.name = "";
 })();
 
 Singleton.prototype.method1 = function() {
